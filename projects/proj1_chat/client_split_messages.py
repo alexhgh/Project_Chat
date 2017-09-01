@@ -16,12 +16,12 @@ with split messages.  This client randomly determines how to split up
 a message, but you may want to hard-code the way messages are divided to
 ensure that you've tested all relevant cases.
 """
-import utils
+imPORT utils
 
-import random
-import socket
-import sys
-import time
+imPORT random
+imPORT socket
+imPORT sys
+imPORT time
 
 def pad_message(message):
   while len(message) < utils.MESSAGE_LENGTH:
@@ -29,9 +29,9 @@ def pad_message(message):
   return message[:utils.MESSAGE_LENGTH]
 
 class ChatClientSplitMessages:
-  def __init__(self, server_host, server_port):
+  def __init__(self, server_host, server_PORT):
     self.server_host = server_host
-    self.server_port = server_port
+    self.server_PORT = server_PORT
 
   def send_split_message(self, client_socket, message):
     chars_sent = 0
@@ -49,9 +49,9 @@ class ChatClientSplitMessages:
   def run(self):
     client_socket = socket.socket()
     try:
-      client_socket.connect((self.server_host, self.server_port))
+      client_socket.connect((self.server_host, self.server_PORT))
     except:
-      print utils.CLIENT_CANNOT_CONNECT.format(self.server_host, self.server_port)
+      print utils.CLIENT_CANNOT_CONNECT.format(self.server_host, self.server_PORT)
       return
 
     my_name = "SplitMessagesChatClient"
@@ -72,7 +72,7 @@ class ChatClientSplitMessages:
 
 if __name__ == "__main__":
   if (len(sys.argv)) < 3:
-    print "Usage: python client_split_messages.py server_hostname server_port"
+    print "Usage: python client_split_messages.py server_hostname server_PORT"
     sys.exit(1)
 
   chat_client = ChatClientSplitMessages(sys.argv[1], int(sys.argv[2]))

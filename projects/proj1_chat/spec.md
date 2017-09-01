@@ -22,17 +22,17 @@ This assignment (and the rest of the assignments in this class) should be implem
 
 ## What are sockets?
 
-A socket is an endpoint of a connection between two programs running across a network.  Each socket is associated with a particular port number.  Sockets are an abstraction provided by operating systems: programs create sockets, read from those sockets, and write to those sockets.  When a program writes to a socket, the operating system sends data out a particular port; similarly, with the operating system receives data on a port, that data can be read from the socket corresponding to that port.
+A socket is an endpoint of a connection between two programs running across a network.  Each socket is associated with a particular PORT number.  Sockets are an abstraction provided by operating systems: programs create sockets, read from those sockets, and write to those sockets.  When a program writes to a socket, the operating system sends data out a particular PORT; similarly, with the operating system receives data on a PORT, that data can be read from the socket corresponding to that PORT.
 
 In Python, you can create a socket and connect to a remote endpoint by using the [socket library](https://docs.python.org/2/library/socket.html) as follows:
 
-    import socket
+    imPORT socket
     # The socket constructor accepts a few arguments; the defaults are fine for this class.
     client_socket = socket.socket()
     client_socket.connect(("1.2.3.4", 5678))
     client_socket.sendall("Hello World")
     
-The example above created a socket and connected it to port 5678 at IP address 1.2.3.4.  Then, it sent a "Hello World" message to the server at 1.2.3.4:5678.
+The example above created a socket and connected it to PORT 5678 at IP address 1.2.3.4.  Then, it sent a "Hello World" message to the server at 1.2.3.4:5678.
 
 The example above created a client socket that was connected to exactly one remote endpoint.  When you create a server, you'll typically want to allow multiple remote clients to connect, and you don't usually know the address of those clients when the socket is created.  As a result, server sockets work differently:
 
@@ -40,7 +40,7 @@ The example above created a client socket that was connected to exactly one remo
     server_socket.bind(("1.2.3.4", 5678))
     server_socket.listen(5)
     
-After creating the socket, rather than connecting to a particular remote destination, the code above *bound* the socket to a particular IP address and port, which essentially tells the operating system to associate the given IP address and port with the socket.  Finally, the `listen` call listens for connections made to the socket.  When a new client connects to the socket, the socket library will create a new socket to use to communicate with that client, so that the server socket can continue to be used to wait for inbound connections from other clients:
+After creating the socket, rather than connecting to a particular remote destination, the code above *bound* the socket to a particular IP address and PORT, which essentially tells the operating system to associate the given IP address and PORT with the socket.  Finally, the `listen` call listens for connections made to the socket.  When a new client connects to the socket, the socket library will create a new socket to use to communicate with that client, so that the server socket can continue to be used to wait for inbound connections from other clients:
 
     (new_socket, address) = server_socket.accept()
     
@@ -58,11 +58,11 @@ The first part of the assignment will help you get started with the socket progr
 
 For this part of the assignment, you'll write a simple client and server.  The client will send a single message from stdin to the server and then disconnect.  The server should print messages it receives to stdout.  If multiple clients connect to the server, the server should handle them sequentially (i.e., it should print the complete message from one client and close that connection before handling the next client).
 
-The server should accept one command line argument, stating the port that the server should use:
+The server should accept one command line argument, stating the PORT that the server should use:
 
     $ python basic_server.py 12345
     
-The client should accept two command line arguments: the hostname (or IP address) of the server to connect to, and the server port:
+The client should accept two command line arguments: the hostname (or IP address) of the server to connect to, and the server PORT:
 
     $ python basic_client.py localhost 12345
     
@@ -85,7 +85,7 @@ Here's an example of how your client and server should work.  Suppose two differ
     $ python basic_client.py localhost 12345
     Why is Shenker so bad at drawing?
     
-If a server had been started on port 12345 before the client was run, it should have printed output as follows:
+If a server had been started on PORT 12345 before the client was run, it should have printed output as follows:
 
     $ python basic_server.py 12345
     I am a student in CS168. This class is awesome!
@@ -98,7 +98,7 @@ In the remainder of the assignment, you'll build on your basic client and server
 
 ### Server Functionality
 
-The server should accept a single command line argument that's the port that the server should run on.
+The server should accept a single command line argument that's the PORT that the server should run on.
 
 #### Messages
 
@@ -142,11 +142,11 @@ Each client connects to a particular chat server, and is associated with a name.
 
     $ python client.py Scott 127.0.0.1 55555
     
-This command should connect to the server at the given address and port number, and then send a message with the name Scott.
+This command should connect to the server at the given address and PORT number, and then send a message with the name Scott.
 
 After being started, the client should listen for messages from the server and from stdin.  Messages from the server should be printed to the command line (after being stripped of any spaces at the end) and messages from stdin should be sent to the server (after being padded with spaces, as needed).  The client code should print [Me] before each message sent by that particular client so that the client can differentiate its own messages from messages sent by others.  When the client gets a message from the server, it should write over the `[Me]` with the message from the server.  For an example of this, take a look at the demo video linked above.
 
-Here's an example of a client's interaction with a server that was started locally on port 55555:
+Here's an example of a client's interaction with a server that was started locally on PORT 55555:
 
 	python client.py Panda localhost 55555
 	[Me] Hello world!
@@ -192,7 +192,7 @@ You can then upload your project files into the "Project 1" assignment by select
 
 ##### What python libraries can I use?
 
-Our solution code imports select, socket, and sys.  You should not import any other python libraries without asking first on Piazza.
+Our solution code imPORTs select, socket, and sys.  You should not imPORT any other python libraries without asking first on Piazza.
 
 ##### How do I figure out the IP address to use to connect to my chat server?
 
@@ -222,13 +222,13 @@ The first entry above is the loopback address, which can be used to access the m
 
 If you're behind a [NAT](http://en.wikipedia.org/wiki/Network_address_translation), you won't be able to reach your server from different machines.  We'll learn more about NATs later this semester.  In the meantime, if you'd like to play around with using your server from remote machines, try running it while connected to the wifi in Soda hall, which doesn't use a NAT, and assigns users unique IP addresses.
 
-##### What's a good port number to pass in?
+##### What's a good PORT number to pass in?
 
-Many low port numbers are reserved; try using a port number greater than 10000.
+Many low PORT numbers are reserved; try using a PORT number greater than 10000.
 
 ##### When I start the server, I get an error that says `Address already in use`
 
-This error means that another process is currently using the port.  Sometimes this happens transiently -- for example, if your server exited with an error, and not all of the sockets it was using have been cleaned up by the operating system yet.  When this happens, try using a different port.
+This error means that another process is currently using the PORT.  Sometimes this happens transiently -- for example, if your server exited with an error, and not all of the sockets it was using have been cleaned up by the operating system yet.  When this happens, try using a different PORT.
 
 ##### What maximum number of connections should I use in the `listen` call?
 

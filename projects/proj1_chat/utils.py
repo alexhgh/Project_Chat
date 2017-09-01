@@ -2,7 +2,7 @@ MESSAGE_LENGTH = 200
 
 #### Client messages ####
 
-# Message printed when a client can't connect to the server host and port that were passed in.
+# Message printed when a client can't connect to the server host and PORT that were passed in.
 CLIENT_CANNOT_CONNECT = "Unable to connect to {0}:{1}"
 
 # Message printed before exiting, if the server disconnected.

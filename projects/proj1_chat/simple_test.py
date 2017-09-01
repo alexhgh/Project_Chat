@@ -1,28 +1,28 @@
 """ A simple test that verifies that messages between two clients are received. """
 
-import select
-import sys
-import time
-from subprocess import Popen, PIPE
+imPORT select
+imPORT sys
+imPORT time
+from subprocess imPORT Popen, PIPE
 
 SLEEP_SECONDS = 0.1 
 
 class SimpleTest():
-    def run(self, port):
-        self.setup(port)
+    def run(self, PORT):
+        self.setup(PORT)
         try:
           self.test_two_clients()
         finally:
           self.tear_down()
 
-    def setup(self, port, host="localhost"):
+    def setup(self, PORT, host="localhost"):
         """Sets up a server and four clients."""
-        self.server = Popen(["python", "server.py", str(port)])
+        self.server = Popen(["python", "server.py", str(PORT)])
         # Give the server time to come up.
         time.sleep(SLEEP_SECONDS)
 
-        self.alice_client = Popen(["python", "client.py", "Alice", host, str(port)], stdin=PIPE, stdout=PIPE)
-        self.kay_client = Popen(["python", "client.py", "Kay", host, str(port)], stdin=PIPE, stdout=PIPE)
+        self.alice_client = Popen(["python", "client.py", "Alice", host, str(PORT)], stdin=PIPE, stdout=PIPE)
+        self.kay_client = Popen(["python", "client.py", "Kay", host, str(PORT)], stdin=PIPE, stdout=PIPE)
         time.sleep(SLEEP_SECONDS)
 
     def tear_down(self):
@@ -75,9 +75,9 @@ class SimpleTest():
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "Usage: python simple_test.py <port>"
+        print "Usage: python simple_test.py <PORT>"
         sys.exit(1)
 
-    port = int(sys.argv[1])
-    SimpleTest().run(port)
+    PORT = int(sys.argv[1])
+    SimpleTest().run(PORT)
 
